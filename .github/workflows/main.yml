@@ -27,7 +27,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Navigate to EC2 Terraform Directory
-        run: cd ../../ec2
+        run: cd ec2
 
       - name: EC2 Key Pair Creation
         run: ssh-keygen -t rsa -f ~/.ssh/assignment1 -N "" 
@@ -45,7 +45,7 @@ jobs:
         run: terraform apply -auto-approve
 
       - name: Navigate to ECR Terraform Directory
-        run: cd ../ecr
+        run: cd ecr
 
       - name: Initialize Terraform
         run: terraform init
