@@ -1,0 +1,57 @@
+name: Deploy EC2 and ECR repos
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  terraform:
+    name: Deploy EC2 and ECR repos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Navigate to EC2 Terraform Directory
+        run: cd terraform/ec2
+
+      - name: EC2 Key Pair Creation
+        run: ssh-keygen -t rsa -f ~/.ssh/assignment1 -N "" 
+        
+      - name: chmod 400 on the key
+        run: chmod 400 ~/.ssh/assignment1.pub          
+        
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Plan Terraform
+        run: terraform plan
+
+      - name: Apply Terraform
+        run: terraform apply -auto-approve
+
+      - name: Navigate to ECR Terraform Directory
+        run: cd terraform/ecr
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Plan Terraform
+        run: terraform plan
+
+      - name: Apply Terraform
+        run: terraform apply -auto-approve
