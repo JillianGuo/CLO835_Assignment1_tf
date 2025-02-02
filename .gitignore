@@ -1,0 +1,7 @@
+.git
+.terraform
+.terraform.lock.hcl
+assignment1-dev.pub
+terraform.tfstate
+terraform.tfstate.backup
+README.md
