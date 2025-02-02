@@ -67,7 +67,7 @@ resource "aws_instance" "my_amazon" {
 # Adding SSH key to Amazon EC2
 resource "aws_key_pair" "my_key" {
   key_name   = "assignment1"
-  public_key = file("${local.name_prefix}.pub")
+  public_key = file("assignment1.pub")
 }
 
 # Security Group
