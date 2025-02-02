@@ -1,4 +1,4 @@
-name: Deploy EC2 and ECR repos
+name: Deploy EC2 and ECR repos with Terraform
 
 on:
   push:
