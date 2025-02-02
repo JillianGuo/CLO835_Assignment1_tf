@@ -49,22 +49,28 @@ jobs:
         run: chmod 400 ~/.ssh/assignment1.pub          
         
       - name: Initialize Terraform
+        working-directory: ec2
         run: terraform init
 
       - name: Plan Terraform
+        working-directory: ec2
         run: terraform plan
 
       - name: Apply Terraform
+        working-directory: ec2
         run: terraform apply -auto-approve
 
       - name: Navigate to ECR Terraform Directory
         run: cd ecr
 
       - name: Initialize Terraform
+        working-directory: ecr
         run: terraform init
 
       - name: Plan Terraform
+        working-directory: ecr
         run: terraform plan
 
       - name: Apply Terraform
+        working-directory: ecr
         run: terraform apply -auto-approve
