@@ -36,6 +36,8 @@ jobs:
 
       # - name: Wait 10 seconds for the creation of S3 bucket
       #   run: sleep 10
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity       
         
       - name: Navigate to EC2 Terraform Directory
         run: cd ec2
